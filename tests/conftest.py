@@ -8,7 +8,7 @@ from urllib3.exceptions import ProtocolError
 
 @pytest.fixture(scope="module")
 def driver():
-    SELENIUM_HOST = os.environ.get("SELENIUM_HOST", "localhost")
+    SELENIUM_HOST = os.environ.get("SELENIUM_HOST", "selenium")
     SELENIUM_PORT = os.environ.get("SELENIUM_PORT", "4444")
     BROWSER = os.environ.get("BROWSER", "chrome").lower()
     MAX_RETRIES = 3
