@@ -140,7 +140,7 @@ jobs:
 
    deploy-ecs-dev:
      if: ${{ github.event_name == 'push' }}
-     needs: [trivy-image-check]
+     needs: [trivy-image-check,e2e-test]
      runs-on: ubuntu-latest
      steps:
        - name: setup aws cli
