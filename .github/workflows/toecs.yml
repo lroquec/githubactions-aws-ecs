@@ -109,7 +109,7 @@ jobs:
          env:
            SE_OPENTELEMETRY_TRACING: 0
 
-       app:
+       myapp:
          image: lroquec/cicd-tests:latest
          ports:
            - 5000:5000
