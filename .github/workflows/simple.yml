@@ -1,4 +1,4 @@
-name: container to ecs
+name: simple
 on: 
   workflow_dispatch:
 env:
