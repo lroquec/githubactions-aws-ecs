@@ -40,7 +40,7 @@ jobs:
       - name: Obtener y limpiar la definición de tarea actual
         run: |
           aws ecs describe-task-definition \
-            --task-definition tu-definicion-de-tarea \
+            --task-definition MyflaskApp \
             --query 'taskDefinition' \
             --output json > task-def-temp.json
 
@@ -61,7 +61,7 @@ jobs:
       - name: Actualizar el servicio ECS
         run: |
           aws ecs update-service \
-            --cluster tu-cluster-ecs \
-            --service tu-servicio-ecs \
+            --cluster MyECSCluster \
+            --service MyECSService \
             --task-definition ${{ steps.register-task-def.outputs.task-def-arn }}
 
