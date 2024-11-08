@@ -11,7 +11,6 @@ def test_app_loads_correctly(driver):
     app_url = f"http://{APP_HOST}:{APP_PORT}"
     print(f"\nAttempting to access: {app_url}")
 
-
     try:
         print("Starting page get...")
         driver.get(app_url)
