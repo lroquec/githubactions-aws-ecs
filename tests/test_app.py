@@ -11,6 +11,16 @@ def test_app_loads_correctly(driver):
     app_url = f"http://{APP_HOST}:{APP_PORT}"
     print(f"\nAttempting to access: {app_url}")
 
+    chrome_options = Options()
+    chrome_options.add_argument('--ignore-certificate-errors')
+    chrome_options.add_argument('--allow-insecure-localhost')
+
+    driver = webdriver.Remote(
+        command_executor=os.environ['SELENIUM_REMOTE_URL'],
+        options=chrome_options
+    )
+
+
     try:
         print("Starting page get...")
         driver.get(app_url)
