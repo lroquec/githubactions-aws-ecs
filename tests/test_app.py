@@ -5,7 +5,7 @@ os.environ['OTEL_TRACES_EXPORTER'] = 'none'
 
 
 def test_app_loads_correctly(driver):
-    APP_HOST = os.environ.get("APP_HOST", "app")
+    APP_HOST = os.environ.get("APP_HOST", "myapp")
     APP_PORT = os.environ.get("APP_PORT", "5000")
 
     app_url = f"http://{APP_HOST}:{APP_PORT}"
