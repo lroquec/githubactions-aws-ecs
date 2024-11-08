@@ -108,7 +108,7 @@ jobs:
            --health-retries=3
 
        app:
-         image: $docker_user/$app_name:latest
+         image: "$docker_user/$app_name:latest"
          ports:
            - 5000:5000
          options: >-
