@@ -49,7 +49,7 @@ jobs:
       - name: Actualizar la definición de tarea con el nuevo tag de imagen
         run: |
           IMAGE_TAG=${{ github.sha }}
-          jq --arg IMAGE "tu_usuario/tu_imagen:$IMAGE_TAG" '.containerDefinitions[0].image = $IMAGE' task-def.json > new-task-def.json
+          jq --arg IMAGE "${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:$IMAGE_TAG" '.containerDefinitions[0].image = $IMAGE' task-def.json > new-task-def.json
 
       - name: Registrar la nueva definición de tarea
         id: register-task-def
