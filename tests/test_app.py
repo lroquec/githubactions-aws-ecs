@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 
 os.environ['OTEL_TRACES_EXPORTER'] = 'none'
 
+
 def test_app_loads_correctly(driver):
     APP_HOST = os.environ.get("APP_HOST", "host.docker.internal")
     APP_PORT = os.environ.get("APP_PORT", "5000")

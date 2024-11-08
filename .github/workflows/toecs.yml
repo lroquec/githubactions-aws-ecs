@@ -106,6 +106,8 @@ jobs:
            --health-interval=5s
            --health-timeout=5s
            --health-retries=3
+         env:
+           SE_OPENTELEMETRY_TRACING: 0
 
        app:
          image: lroquec/cicd-tests:latest
