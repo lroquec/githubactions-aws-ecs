@@ -94,7 +94,7 @@ jobs:
            retention-days: 1
 
    e2e-test:
-     needs: [flake8-lint,sonarcloud]
+     needs: [trivy-image-check]
      runs-on: ubuntu-latest
      services:
        selenium:
