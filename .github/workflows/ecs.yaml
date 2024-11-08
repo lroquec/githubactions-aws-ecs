@@ -23,7 +23,8 @@ jobs:
           aws ecs describe-task-definition \
             --task-definition MyflaskApp \
             --query 'taskDefinition' \
-            --output json > task-def.json
+            --output json > task-def-temp.json
+          jq 'del(.revision, .status, .taskDefinitionArn, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy)' task-def-temp.json > task-def.json
 
       - name: Edit actual definition
         run: |
