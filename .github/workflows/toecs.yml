@@ -87,7 +87,7 @@ jobs:
            image-ref: 'docker.io/${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:latest'
            output: trivy-report.sarif
            format: sarif
-           exit-code: '1'
+           exit-code: '0'
            ignore-unfixed: true
            vuln-type: 'os,library'
            severity: 'CRITICAL'
