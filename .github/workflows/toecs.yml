@@ -85,7 +85,7 @@ jobs:
          run: |
            wget https://github.com/aquasecurity/trivy/releases/download/v0.57.0/trivy_0.57.0_Linux-64bit.deb
            sudo dpkg -i trivy_0.57.0_Linux-64bit.deb
-           trivy image --severity CRITICAL --exit-code 0 --format sarif --output trivy-report.sarif ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
+           trivy image --severity CRITICAL --exit-code 0 --format sarif --output trivy-report.sarif $docker_user/$app_name:latest
        - name: Upload Vulnerability Scan Results
          uses: actions/upload-artifact@v4
          with:
@@ -108,7 +108,7 @@ jobs:
            --health-retries=3
 
        app:
-         image: ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}
+         image: $docker_user/$app_name
          ports:
            - 5000:5000
          options: >-
