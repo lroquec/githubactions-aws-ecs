@@ -85,7 +85,7 @@ jobs:
          run: |
            wget https://github.com/aquasecurity/trivy/releases/download/v0.57.0/trivy_0.57.0_Linux-64bit.deb
            sudo dpkg -i trivy_0.57.0_Linux-64bit.deb
-           trivy image --severity CRITICAL --exit-code 0 --format sarif --output trivy-report.sarif lroquec/cicd-tests:latest
+           trivy image --severity CRITICAL --exit-code 0 --format sarif --output trivy-report.sarif ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
        - name: Upload Vulnerability Scan Results
          uses: actions/upload-artifact@v4
          with:
@@ -96,6 +96,26 @@ jobs:
    e2e-test:
      needs: [flake8-lint,sonarcloud]
      runs-on: ubuntu-latest
+     services:
+       selenium:
+         image: selenium/standalone-chrome:latest
+         ports:
+           - 4444:4444
+         options: >-
+           --health-cmd="curl -s http://localhost:4444/wd/hub/status | grep 'ready' || exit 1"
+           --health-interval=5s
+           --health-timeout=5s
+           --health-retries=3
+
+       app:
+         image: ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}
+         ports:
+           - 5000:5000
+         options: >-
+           --health-cmd="curl -f http://localhost:5000 || exit 1"
+           --health-interval=10s
+           --health-timeout=5s
+           --health-retries=5
      steps:
        - uses: actions/checkout@v4       
        - uses: actions/setup-python@v5
@@ -106,6 +126,17 @@ jobs:
          run: |
            pip install selenium
            pip install pytest
+       - name: Run Selenium Tests
+         env:
+           SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
+         run: |
+           python3 -m pytest tests/ -s --junitxml=report.xml
+       - name: Upload Selenium results
+         uses: actions/upload-artifact@v4
+         with:
+           name: selenium-test-results
+           path: test-reports/
+           retention-days: 1
 
    deploy-ecs-dev:
      if: ${{ github.event_name == 'push' }}
