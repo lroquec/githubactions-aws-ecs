@@ -96,9 +96,6 @@ jobs:
    e2e-test:
      needs: [flake8-lint,sonarcloud]
      runs-on: ubuntu-latest
-     env:
-       docker_user: ${{ secrets.DOCKER_USERNAME }}
-       app_name: ${{ vars.IMAGE_NAME }}
      services:
        selenium:
          image: selenium/standalone-chrome:latest
@@ -111,7 +108,7 @@ jobs:
            --health-retries=3
 
        app:
-         image: $docker_user/$app_name:latest
+         image: lroquec/cicd-tests:latest
          ports:
            - 5000:5000
          options: >-
