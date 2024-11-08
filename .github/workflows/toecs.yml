@@ -59,7 +59,7 @@ jobs:
            python -m unittest tests/unit_test_app.py
 
    build-push:
-     needs: [unit-test]
+     needs: [unit-test,e2e-test]
      runs-on: ubuntu-latest
      steps:
        - name: Set up QEMU
@@ -108,7 +108,7 @@ jobs:
            --health-retries=3
 
        app:
-         image: $docker_user/$app_name
+         image: $docker_user/$app_name:latest
          ports:
            - 5000:5000
          options: >-
