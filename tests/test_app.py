@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 
 def test_app_loads_correctly(driver):
-    APP_HOST = os.environ.get("APP_HOST", "app_container")
+    APP_HOST = os.environ.get("APP_HOST", "host.docker.internal")
     APP_PORT = os.environ.get("APP_PORT", "5000")
 
     app_url = f"http://{APP_HOST}:{APP_PORT}"
