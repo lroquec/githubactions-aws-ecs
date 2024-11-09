@@ -3,6 +3,8 @@
 ## Overview
 This GitHub Actions workflow automates the process of linting, running unit tests, building a Docker image, scanning for vulnerabilities, executing end-to-end (E2E) tests, and deploying the container to AWS ECS Fargate upon changes to the `main` branch. It ensures code quality and security checks are conducted prior to deployment.
 
+![Workflow Diagram](./toecs-workflow-diagram.png)
+
 ## Prerequisites
 - This GitHub repository.
 - Docker Hub account with `DOCKER_USERNAME` and `DOCKER_PASS` secrets set in the repository.
@@ -15,7 +17,7 @@ This GitHub Actions workflow automates the process of linting, running unit test
    - iam:PassRole
    - logs:CreateLogStream
    - logs:PutLogEvents
-- AWS ECS cluster created and working. You could use my cloudformation templates available at 
+- AWS ECS cluster created and working. You could use my cloudformation templates available at [CloudFormation Snippets](https://github.com/lroquec/cfn-snippets.git)
 - SonarCloud account for code analysis with `SONAR_TOKEN` set as a secret.
 
 ## Detailed Explanation
