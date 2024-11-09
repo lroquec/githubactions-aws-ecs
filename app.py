@@ -18,7 +18,7 @@ def hello():
                         font-family: Arial, sans-serif;
                         text-align: center;
                         margin-top: 50px;
-                        background-color: #f0f0f0;
+                        background-color: #a6dde1;
                     }
                     h1 {
                         color: #333;
